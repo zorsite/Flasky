@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习JavaScript</title>
+</head>
+<body>
+
+
+<p id="myparagraph">
+所有元素都有可以设置id，id不能重复。</p>
+
+<script>
+    function testfunction()
+    {
+        var x=document.getElementById("myparagraph") // 找到元素
+        x.style.color="#ff0000";          // 改变样式
+        x.align="Center"
+    }
+</script>
+<button onclick="testfunction()">原来如猫</button>
+<!--<button type="button" onclick="myFunction()">点击这里</button>-->
+
+</body>
+</html>

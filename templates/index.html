@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echarts & Ajax</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts3 Ajax</title>
+    <script src="/static/jquery-3.3.1.js"></script>
+    <script src="/static/echarts.min.js"></script>
+</head>
+
+<body>
+    <!--为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:300px;height:200px;border:1px solid #ccc;padding:10px;"></div>
+
+    <script>
+    var myChart = echarts.init(document.getElementById('main'));//初始化图表
+    // 显示标题，图例和空的坐标轴
+    myChart.setOption({
+       animation: false,
+        title:{text:'右臂翻转力量',textStyle:{fontSize:12}},
+        tooltip:{},
+        legend:{show:true, right: 10,top:20,right:40,orient: 'vertical',textStyle:{fontSize:12},data:[{name:'右手',icon:'line'}]},
+        //图例一定要等于series中的某个name
+        xAxis:{min:0,max:5,type: 'value'},
+        yAxis:{min:0},
+        series:[{name:'右手',type:'line',smooth: true,data:[]}]//图表框架搭建好，数据暂时留空
+    });
+    myChart.showLoading(); // 显示加载动画
+
+    // 异步加载数据
+    $.get('/getData',"json").done(function (data) {
+        myChart.hideLoading(); // 获取到数据之后，隐藏加载动画，显示曲线
+
+        // 填入数据
+        myChart.setOption({
+            series: [{
+                name: '右手', // 根据名字对应到相应的系列
+                data: data
+            }]
+        });
+    });
+    </script>
+</body>
+</html>
+</body>
+</html>
